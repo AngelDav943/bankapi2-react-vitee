@@ -1,0 +1,9 @@
+.login {
+    gap: 1rem;
+
+    padding: 2rem 1rem;
+    margin: auto;
+
+    min-height: calc(100dvh - 4rem);
+    max-width: 300px;
+}
