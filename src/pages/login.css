@@ -1,9 +1,24 @@
 .login {
-    gap: 1rem;
+    background: linear-gradient(white, rgb(208, 208, 255));
+    min-height: calc(100dvh);
+}
 
-    padding: 2rem 1rem;
-    margin: auto;
+.login .top img {
+    max-height: 50px;
+}
 
-    min-height: calc(100dvh - 4rem);
-    max-width: 300px;
+.login .top {
+    margin-bottom: 0.5rem;
+}
+
+.login .main {
+    background-color: white;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+
+    border-radius: 1rem;
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+
+    width: calc(100% - 4rem);
+    max-width: 350px;
 }

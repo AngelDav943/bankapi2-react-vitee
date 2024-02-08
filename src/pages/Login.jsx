@@ -32,11 +32,28 @@ export default function ({ setUser }) {
     }
 
     return <>
-        <Stack className='login' justifyContent="center">
-            <Typography variant='h5'>Log in</Typography>
-            <TextField fullWidth error={error != null} id="username" label="Username" variant="outlined" value={account} onChange={({ target: { value } }) => setAccount(value)} />
-            <TextField fullWidth error={error != null} helperText={error} id="password" type='password' label="Password" variant="outlined" value={password} onChange={({ target: { value } }) => setPassword(value)} />
-            <Button type='submit' variant="contained" onClick={submitLogin}>Log in</Button>
+        <Stack className='login' justifyContent="center" alignItems="center">
+            <Stack className="main">
+                <Stack direction="row" justifyContent="space-between" alignItems="center" className='top'>
+                    <Typography variant='h5'>Log in</Typography>
+                    <img src="placeholder_logo.png" alt="" />
+                </Stack>
+                <TextField
+                    error={error != null}
+                    label="Username"
+                    onChange={({ target: { value } }) => setAccount(value)}
+                />
+                <TextField
+                    error={error != null}
+                    label="Password"
+                    helperText={error}
+                    type='password'
+                    onChange={({ target: { value } }) => setPassword(value)}
+                />
+                <Button variant="contained" onClick={submitLogin}>
+                    Log in
+                </Button>
+            </Stack>
         </Stack>
     </>
 }
