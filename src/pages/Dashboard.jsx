@@ -1,9 +1,14 @@
-import { Typography, Button, TextField, Box, Stack } from '@mui/material'
+import { Typography, Button, TextField, Box, Stack, Skeleton } from '@mui/material'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import './dashboard.css'
+import Loading from '../components/Loading';
+import Transaction from '../components/Transaction';
+
 export default function ({ user }) {
 
+    const [loaded, setLoaded] = useState(false);
     const [transfers, setTransfers] = useState({});
 
     const getMovements = async () => {
@@ -12,20 +17,27 @@ export default function ({ user }) {
 
         const data = (await axios.get('https://apibank.ikoodi.site/api/movements/' + (id + 1)))
         if (data) setTransfers(data.data)
+        setLoaded(true)
     }
 
     useEffect(() => { getMovements() }, [])
 
-    console.log(user)
+    return loaded ? <Stack className='dashboard' direction="row" justifyContent="space-around" flexWrap="wrap">
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <span>Welcome back, {user?.name}</span>
+            <span className='account'>No. {user?.account}</span>
+        </Stack>
 
-    return <Stack direction="row" justifyContent="space-around">
-        <Box>
-            <p>{user?.account}</p>
-            <p>{user?.name}</p>
-            <p>Balance: {user?.money}</p>
-        </Box>
-        <Box>
+        <Stack className='small'>
+            <span className='balance'>{Math.floor(user?.money* 100)/100}$</span>
+        </Stack>
+        <Stack className='small' alignItems="strech">
             <h3>Transaction history</h3>
-        </Box>
-    </Stack>
+            <Stack className="history" >
+                {transfers && transfers.map(transfer => (
+                    <Transaction info={transfer} />
+                ))}
+            </Stack>
+        </Stack>
+    </Stack> : <Loading/>
 }

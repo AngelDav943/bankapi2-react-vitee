@@ -1,0 +1,35 @@
+.loadingbox {
+    z-index: 2;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    pointer-events: inherit;
+
+    background-color: #00000080;
+    color: white;
+    transition: opacity .6s;
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.loadingbox img.icon {
+    color: white;
+    animation: iconLoop 1s;
+    animation-iteration-count:infinite;
+}
+
+@keyframes iconLoop {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    0% {
+        transform: rotate(-360deg);
+    }
+}

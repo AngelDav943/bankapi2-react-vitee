@@ -1,7 +1,7 @@
 .header {
     padding: 0.5rem 1rem;
     height: 3rem;
-    background-color: #636cff;
+    background-color: var(--primary);
 }
 
 .header img {

@@ -1,0 +1,41 @@
+.dashboard {
+    padding-top: 1rem;
+    max-width: 600px;
+    width: calc(100% - 1rem);
+    margin: auto;
+}
+
+.dashboard > div {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.dashboard .small {
+    margin-top: 1rem;
+    flex-basis: 200px;
+}
+
+.dashboard .history {
+    gap: 1rem;
+}
+
+.dashboard h3 {
+    margin-top: 0;
+}
+
+.dashboard span.account {
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    background-color: var(--primary);
+    color: white;
+}
+
+.dashboard span.balance {
+    /* width: max-content; */
+    text-align: center;
+    font-size: 3rem;
+    padding: 0.2rem 1rem;
+    margin-right: 1rem;
+    padding-top: 0;
+    border-bottom: 5px solid var(--primary);
+}

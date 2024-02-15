@@ -5,11 +5,14 @@ import { useState } from "react"
 import Login from "./pages/Login";
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
-import Loading from './pages/Loading';
+import Loading from './components/Loading';
+import Transactions from './pages/Transactions';
 
 function App() {
   const [loaded, setLoading] = useState(false);
   const [userData, setUser] = useState(null);
+
+  console.log(userData)
 
   if (userData == null) return <Login setLoading={setLoading} setUser={setUser} />
 
@@ -17,8 +20,10 @@ function App() {
     <Header />
     <Routes>
       <Route path="/" element={<Dashboard user={userData} />} />
-      <Route path="/home" element={<p>Hola</p>} />
+      <Route path="/home" element={<Dashboard user={userData} />} />
+      <Route path="/transactions" element={<Transactions user={userData} setUser={setUser} />} />
     </Routes>
+
   </>
 }
 
