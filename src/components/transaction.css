@@ -1,4 +1,11 @@
 .transfer {
     padding: 0 1rem;
-    background-color: rgba(0, 0, 0, 0.165);
+    background-color: #636bff31;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 5px solid var(--primary);
+}
+
+.transfer .amount {
+    font-weight: bolder;
 }

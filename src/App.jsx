@@ -12,8 +12,6 @@ function App() {
   const [loaded, setLoading] = useState(false);
   const [userData, setUser] = useState(null);
 
-  console.log(userData)
-
   if (userData == null) return <Login setLoading={setLoading} setUser={setUser} />
 
   return <>

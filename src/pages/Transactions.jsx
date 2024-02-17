@@ -12,38 +12,31 @@ export default function ({ user, setUser }) {
 
     const [error, setError] = useState(null);
 
-    const [loaded, setLoaded] = useState(false);
-    const [transfers, setTransfers] = useState({});
-
-    const getMovements = async () => {
-        let id = parseInt(user?.id)
-        if (isNaN(id)) return
-
-        const data = (await axios.get('https://apibank.ikoodi.site/api/movements/' + (id + 1)))
-        if (data) setTransfers(data.data)
-        setLoaded(true)
-    }
+    const [loaded, setLoaded] = useState(true);
 
     async function submitTransaction(e) {
-        const data = await axios.post('https://apibank.ikoodi.site/api/movements/', {
-            "amount": parseInt(amount),
-            "account_recive": account,
-            "id": user?.id,
-            "token": user?.token,
-        })
+        try {
+            const data = await axios.post('https://apibank.ikoodi.site/api/movements/', {
+                "amount": parseInt(amount),
+                "account_recive": account,
+                "id": user?.id,
+                "token": user?.token,
+            })
 
-        if (data.data["new_money"]) setUser({
-            ...user,
-            "money": data.data["new_money"]
-        })
+            if (data.data["new_money"]) setUser({
+                ...user,
+                "money": data.data["new_money"]
+            })
+        } catch (error) {
+
+        }
+
     }
-
-    useEffect(() => { getMovements() }, [])
 
     return loaded ? <Stack className='dashboard' direction="row" justifyContent="space-around" flexWrap="wrap">
 
         <Stack className='small'>
-            <span className='balance'>{Math.floor(user?.money* 100)/100}$</span>
+            <span className='balance'>{Math.floor(user?.money * 100) / 100}$</span>
         </Stack>
 
         <Stack className="main" gap="1rem">
@@ -51,7 +44,7 @@ export default function ({ user, setUser }) {
                 error={error != null}
                 type='text'
                 label="Account"
-                value={account.replace(/(?![0-9])./g , "") || ""}
+                value={account.replace(/(?![0-9])./g, "") || ""}
                 onChange={({ target: { value } }) => setAccount(value)}
             />
             <TextField
@@ -66,5 +59,5 @@ export default function ({ user, setUser }) {
             </Button>
         </Stack>
 
-    </Stack> : <Loading/>
+    </Stack> : <Loading />
 }

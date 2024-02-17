@@ -3,21 +3,20 @@
     min-height: calc(100dvh);
 }
 
-.login .top img {
-    max-height: 50px;
+.login .logo img {
+    max-height: 100px;
 }
 
-.login .top {
+.login .logo {
     margin-bottom: 0.5rem;
 }
 
 .login .main {
-    background-color: white;
     padding: 2rem 1.5rem;
     gap: 1.5rem;
 
-    border-radius: 1rem;
-    outline: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    /* outline: 1px solid rgba(0, 0, 0, 0.1); */
 
     width: calc(100% - 4rem);
     max-width: 350px;

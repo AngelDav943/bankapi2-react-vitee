@@ -33,21 +33,20 @@ export default function ({ setUser }) {
         setError(error);
         setLoaded(true);
         if (responseData && responseData["user"] && responseData.token) {
-            setUser({...responseData.user, "token": responseData.token})
+            setUser({ ...responseData.user, "token": responseData.token })
         }
     }
 
     return <Stack className='login' justifyContent="center" alignItems="center">
         <Stack className="main">
-            <Stack direction="row" justifyContent="space-between" alignItems="center" className='top'>
-                <Typography variant='h5'>Log in</Typography>
-                <img src="placeholder_logo.png" alt="" />
-            </Stack>
+        <Stack direction="row" justifyContent="center" alignItems="center" className='logo'>
+            <img src="placeholder_logo.png" alt="" />
+        </Stack>
             <TextField
                 error={error != null}
                 type='text'
                 label="Username"
-                value={account.replace(/(?![0-9])./g , "") || ""}
+                value={account.replace(/(?![0-9])./g, "") || ""}
                 onChange={({ target: { value } }) => setAccount(value)}
             />
             <TextField
@@ -57,10 +56,10 @@ export default function ({ setUser }) {
                 type='password'
                 onChange={({ target: { value } }) => setPassword(value)}
             />
-            <Button variant="contained" onClick={submitLogin}>
+            <Button variant="contained" className='submit' onClick={submitLogin}>
                 Log in
             </Button>
         </Stack>
-        {!loaded && <Loading/>}
+        {!loaded && <Loading />}
     </Stack>
 }

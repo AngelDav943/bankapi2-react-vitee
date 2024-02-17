@@ -15,7 +15,7 @@ export default function ({ user }) {
         let id = parseInt(user?.id)
         if (isNaN(id)) return
 
-        const data = (await axios.get('https://apibank.ikoodi.site/api/movements/' + (id + 1)))
+        const data = (await axios.get('https://apibank.ikoodi.site/api/movements/' + (id)))
         if (data) setTransfers(data.data)
         setLoaded(true)
     }
@@ -34,8 +34,8 @@ export default function ({ user }) {
         <Stack className='small' alignItems="strech">
             <h3>Transaction history</h3>
             <Stack className="history" >
-                {transfers && transfers.map(transfer => (
-                    <Transaction info={transfer} />
+                {transfers && transfers.map((transfer, index) => (
+                    <Transaction key={index} info={transfer} />
                 ))}
             </Stack>
         </Stack>
