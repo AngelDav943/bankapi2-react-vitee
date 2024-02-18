@@ -10,10 +10,10 @@ export default function () {
         <Stack className='main' direction="row" justifyContent="space-between">
 
             <img src="minimal_logo.png" alt="logo" onClick={() => setNavigation(!showNavigation)} />
-            <Stack direction="row" alignItems="center" className='nav'>
+            {/* <Stack direction="row" alignItems="center" className='nav'>
                 <Link to="/home">Home</Link>
                 <Link to="/transactions">Transactions</Link>
-            </Stack>
+            </Stack> */}
         </Stack>
     </Box>
 }

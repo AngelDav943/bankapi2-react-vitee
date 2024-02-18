@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 import Loading from './components/Loading';
 import Transactions from './pages/Transactions';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoading] = useState(false);
@@ -21,7 +22,7 @@ function App() {
       <Route path="/home" element={<Dashboard user={userData} />} />
       <Route path="/transactions" element={<Transactions user={userData} setUser={setUser} />} />
     </Routes>
-
+    <Footer />
   </>
 }
 
