@@ -3,15 +3,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import './dashboard.css'
-import Loading from '../components/Loading';
 import Transaction from '../components/Transaction';
+import { useInfo } from '../context/useInfo';
 
-export default function ({ user }) {
-
-    const [loaded, setLoaded] = useState(false);
-    const [transfers, setTransfers] = useState({});
+export default function () {
+    const { user, loaded, setLoaded } = useInfo();
+    
+    const [transfers, setTransfers] = useState(null);
 
     const getMovements = async () => {
+        setLoaded(false);
         let id = parseInt(user?.id)
         if (isNaN(id)) return
 
@@ -22,7 +23,7 @@ export default function ({ user }) {
 
     useEffect(() => { getMovements() }, [])
 
-    return loaded ? <Stack className='dashboard' direction="row" justifyContent="space-around" flexWrap="wrap">
+    return <Stack className='dashboard' direction="row" justifyContent="space-around" flexWrap="wrap">
         <Stack direction="row" justifyContent="space-between" alignItems="center">
             <span>Welcome back, {user?.name}</span>
             <span className='account'>No. {user?.account}</span>
@@ -39,5 +40,5 @@ export default function ({ user }) {
                 ))}
             </Stack>
         </Stack>
-    </Stack> : <Loading/>
+    </Stack>
 }

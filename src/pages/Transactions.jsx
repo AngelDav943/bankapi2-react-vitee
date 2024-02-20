@@ -1,20 +1,20 @@
 import { Typography, Button, TextField, Box, Stack, Skeleton } from '@mui/material'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 import './dashboard.css'
-import Loading from '../components/Loading';
+import { useInfo } from '../context/useInfo';
 
-export default function ({ user, setUser }) {
+export default function () {
+    const { user, setLoaded } = useInfo();
 
     const [account, setAccount] = useState("");
     const [amount, setAmount] = useState(0);
 
     const [error, setError] = useState(null);
 
-    const [loaded, setLoaded] = useState(true);
-
     async function submitTransaction(e) {
+        setLoaded(false);
         try {
             const data = await axios.post('https://apibank.ikoodi.site/api/movements/', {
                 "amount": parseInt(amount),
@@ -28,12 +28,12 @@ export default function ({ user, setUser }) {
                 "money": data.data["new_money"]
             })
         } catch (error) {
-
+            
         }
-
+        setLoaded(true);
     }
 
-    return loaded ? <Stack className='dashboard' direction="row" justifyContent="space-around" flexWrap="wrap">
+    return <Stack className='dashboard' direction="row" justifyContent="space-around" flexWrap="wrap">
 
         <Stack className='small'>
             <span className='balance'>{Math.floor(user?.money * 100) / 100}$</span>
@@ -59,5 +59,5 @@ export default function ({ user, setUser }) {
             </Button>
         </Stack>
 
-    </Stack> : <Loading />
+    </Stack>
 }

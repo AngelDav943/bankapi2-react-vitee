@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Typography, Button, TextField, Box, Stack } from '@mui/material'
 import axios from 'axios';
 
 import './login.css'
-import Loading from '../components/Loading';
+import { useInfo } from '../context/useInfo';
 
-export default function ({ setUser }) {
+export default function () {
+    const { setUser, setLoaded } = useInfo();
 
     const [account, setAccount] = useState("");
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState(null);
-    const [loaded, setLoaded] = useState(true);
 
     async function submitLogin(e) {
         e.preventDefault();
@@ -32,8 +32,8 @@ export default function ({ setUser }) {
 
         setError(error);
         setLoaded(true);
-        if (responseData && responseData["user"] && responseData.token) {
-            setUser({ ...responseData.user, "token": responseData.token })
+        if (responseData && responseData.token) {
+            setUser(responseData);
         }
     }
 
@@ -60,6 +60,5 @@ export default function ({ setUser }) {
                 Log in
             </Button>
         </Stack>
-        {!loaded && <Loading />}
     </Stack>
 }
