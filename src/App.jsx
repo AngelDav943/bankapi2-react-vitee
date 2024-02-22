@@ -1,12 +1,13 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom"
-import './App.css'
+// import './App.css'
 
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 
 import Transactions from './pages/Transactions';
 import Footer from './components/Footer';
+import { AppBar } from '@mui/material';
 
 function App() {
   return <>
@@ -16,7 +17,7 @@ function App() {
       <Route path="/home" element={<Dashboard />} />
       <Route path="/transactions" element={<Transactions />} />
     </Routes>
-    <Footer />
+    {/* <Footer /> */}
   </>
 }
 

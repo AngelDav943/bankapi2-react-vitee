@@ -7,8 +7,9 @@ import Transaction from '../components/Transaction';
 import { useInfo } from '../context/useInfo';
 
 export default function () {
-    const { user, loaded, setLoaded } = useInfo();
-    
+    const { user } = useInfo();
+
+    const [movementsLoaded, setLoaded] = useState(false);
     const [transfers, setTransfers] = useState(null);
 
     const getMovements = async () => {
@@ -16,9 +17,15 @@ export default function () {
         let id = parseInt(user?.id)
         if (isNaN(id)) return
 
-        const data = (await axios.get('https://apibank.ikoodi.site/api/movements/' + (id)))
-        if (data) setTransfers(data.data)
-        setLoaded(true)
+        try {
+            const data = (await axios.get('https://apibank.ikoodi.site/api/movements/' + (id)))
+            if (data) {
+                setTransfers(data.data)
+                setLoaded(true)
+            }
+        } catch (err) {
+
+        }
     }
 
     useEffect(() => { getMovements() }, [])
@@ -30,14 +37,14 @@ export default function () {
         </Stack>
 
         <Stack className='small'>
-            <span className='balance'>{Math.floor(user?.money* 100)/100}$</span>
+            <span className='balance'>{Math.floor(user?.money * 100) / 100}$</span>
         </Stack>
         <Stack className='small' alignItems="strech">
             <h3>Transaction history</h3>
             <Stack className="history" >
-                {transfers && transfers.map((transfer, index) => (
+                {transfers ? transfers.map((transfer, index) => (
                     <Transaction key={index} info={transfer} />
-                ))}
+                )) : <Skeleton height="6rem" />}
             </Stack>
         </Stack>
     </Stack>

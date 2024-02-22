@@ -18,6 +18,7 @@ export function InfoProvider({ children }) {
         loaded,
         setLoaded,
         setUser: (data) => {
+            console.log("data",data)
             if (data["user"] == null || data["token"] == null) return { "success": false }
 
             setUserData({ ...data.user, "token": data.token })
@@ -28,15 +29,20 @@ export function InfoProvider({ children }) {
         },
     }
 
+    useEffect(() => {
+        const savedData = localStorage.getItem("user")
+        if (savedData != null && userData == null ) infoValues.setUser(JSON.parse(savedData))
+    })
+
     if (userData == null) return <infoContext.Provider value={{ ...infoValues }}>
         <Login info={infoValues} />
-        {!loaded && <Loading />}
+        {/* {!loaded && <Loading />} */}
     </infoContext.Provider>
 
     return (
         <infoContext.Provider value={{ ...infoValues }}>
             {children}
-            {!loaded && <Loading />}
+            {/* {!loaded && <Loading />} */}
         </infoContext.Provider>
     )
 }
